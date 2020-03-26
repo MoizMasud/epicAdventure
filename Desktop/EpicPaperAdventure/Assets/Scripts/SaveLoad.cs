@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using UnityEngine.UI;
+
 public class SaveLoad : MonoBehaviour
 {
     public GameObject playerScoreEntryPrefab;
@@ -12,7 +11,7 @@ public class SaveLoad : MonoBehaviour
     [System.Serializable]
     public class PlayerInfo
     {
-        public float score;
+        public string score;
         public int level;
         public string playerName;
 
@@ -30,7 +29,7 @@ public class SaveLoad : MonoBehaviour
 
     }
 
-    public void Save(float score, int level, string playerName)
+    public void Save(string score, int level, string playerName)
     {
 
         SaveData data = new SaveData();

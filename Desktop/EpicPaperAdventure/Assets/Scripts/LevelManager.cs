@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,8 +16,8 @@ public class LevelManager : MonoBehaviour
     public SaveLoad saveLoad;
     private static LevelManager _instance;
 
-    public static LevelManager Instance { get { return _instance; } }
 
+	public static LevelManager Instance { get { return _instance; } }
     public List<GameObject> dynamicObjects = new List<GameObject>();
     private List<Vector3> startPositions = new List<Vector3>();
     public GameObject startMenu;
@@ -41,7 +40,7 @@ public class LevelManager : MonoBehaviour
         {
             startPositions.Add(dynamicObjects[i].transform.position);
         }
-    }
+	}
 
     private void Update()
     {
@@ -54,9 +53,12 @@ public class LevelManager : MonoBehaviour
             ToggleStart();
         }
         level.text = "Level: " + levelNumber; // set initial level
-        score += Time.deltaTime; // set score be the time.
-        scoreText.text = "Score: " + ((int)score).ToString();//score casted into an int so we dont get decimals.
-    }
+		score += Time.deltaTime; // set score be the time.
+
+		string minutes = Mathf.Floor(score / 60).ToString("00");
+		string seconds = Mathf.Floor(score % 60).ToString("00");
+		scoreText.text = string.Format("{0}:{1}", minutes, seconds);
+	}
 
     public void Reset()
     {
@@ -84,9 +86,10 @@ public class LevelManager : MonoBehaviour
     {
         Time.timeScale = 1;
         // save here
-        savePlayerScores();
+        // savePlayerScores(); saving only done when you hit end game block
         SceneManager.LoadScene("MenuScene");
     }
+
     public void levelup()
     {
         //load next level here
@@ -116,7 +119,10 @@ public class LevelManager : MonoBehaviour
 
     void savePlayerScores()
     {
-        saveLoad.Save(score, levelNumber, playerName);
+		string minutes = Mathf.Floor(score / 60).ToString("00");
+		string seconds = Mathf.Floor(score % 60).ToString("00");
+
+		saveLoad.Save(string.Format("{0}:{1}", minutes, seconds), levelNumber, playerName);
     }
 
     public void setName(string name)
