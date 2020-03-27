@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using UnityEngine.UI;
+
 public class SaveLoad : MonoBehaviour
 {
     public GameObject playerScoreEntryPrefab;
     LevelManager score;
     private SaveData somedata;
+    
     [System.Serializable]
     public class PlayerInfo
     {
