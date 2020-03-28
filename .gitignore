@@ -1,2 +1,7 @@
 [Tt]emp/
 [Ll]ibrary/
+obj/
+
+.vs/
+*.csproj
+

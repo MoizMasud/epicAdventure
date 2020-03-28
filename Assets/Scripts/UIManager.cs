@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
