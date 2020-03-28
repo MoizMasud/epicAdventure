@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 public class NameMenuManager : MonoBehaviour
 {
     public Text username;
     static public string characterName;
     private bool hasName = false;
 
-    private void Start()
-    {
-    }
     public void TextChanged(string newText)
     {
         newText = username.text;
@@ -25,16 +23,16 @@ public class NameMenuManager : MonoBehaviour
         }
         characterName = newText;
     }
+
     public void ToGame()
     {
         if (hasName)
         {
-            
-            SceneManager.LoadScene("MainScene");
+            if (LevelSelectManager.Instance != null)
+                SceneManager.LoadScene(LevelSelectManager.Instance.selectedLevel.ToString());
+            else
+                SceneManager.LoadScene("MainScene");
         }
-
-
-
     }
 
     public void ToMenu()
@@ -42,6 +40,7 @@ public class NameMenuManager : MonoBehaviour
         gameObject.SetActive(false);
         SceneManager.LoadScene("MenuScene");
     }
+
     public string getName()
     {
         if (hasName)
@@ -53,6 +52,5 @@ public class NameMenuManager : MonoBehaviour
             Debug.Log("camehere");
             return "";
         }
-
     }
 }

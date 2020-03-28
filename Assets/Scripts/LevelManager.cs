@@ -28,15 +28,18 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        else
-        {
-            _instance = this;
-        }
+
+        _instance = this;
+
     }
 
     private void Start()
     {
         playerName = NameMenuManager.characterName;
+
+        if (LevelSelectManager.Instance != null)
+            levelNumber = LevelSelectManager.Instance.GetSelectedLevelAndDestroy;
+
         for (int i = 0; i < dynamicObjects.Count; i++)
         {
             startPositions.Add(dynamicObjects[i].transform.position);
@@ -88,6 +91,12 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("MenuScene");
     }
+
+    public void setLevel(int level)
+    {
+        this.levelNumber = level;
+    }
+
     public void levelup()
     {
         //load next level here
