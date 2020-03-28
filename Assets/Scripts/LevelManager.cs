@@ -55,8 +55,11 @@ public class LevelManager : MonoBehaviour
         }
         level.text = "Level: " + levelNumber; // set initial level
         score += Time.deltaTime; // set score be the time.
-        scoreText.text = "Score: " + ((int)score).ToString();//score casted into an int so we dont get decimals.
-    }
+
+		string minutes = Mathf.Floor(score / 60).ToString("00");
+		string seconds = Mathf.Floor(score % 60).ToString("00");
+		scoreText.text = string.Format("{0}:{1}", minutes, seconds);
+	}
 
     public void Reset()
     {
@@ -83,8 +86,6 @@ public class LevelManager : MonoBehaviour
     public void Exit()
     {
         Time.timeScale = 1;
-        // save here
-        savePlayerScores();
         SceneManager.LoadScene("MenuScene");
     }
     public void levelup()
@@ -116,8 +117,11 @@ public class LevelManager : MonoBehaviour
 
     void savePlayerScores()
     {
-        saveLoad.Save(score, levelNumber, playerName);
-    }
+		string minutes = Mathf.Floor(score / 60).ToString("00");
+		string seconds = Mathf.Floor(score % 60).ToString("00");
+
+		saveLoad.Save(string.Format("{0}:{1}", minutes, seconds), levelNumber, playerName);
+	}
 
     public void setName(string name)
     { 

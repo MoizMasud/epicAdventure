@@ -13,10 +13,9 @@ public class SaveLoad : MonoBehaviour
     [System.Serializable]
     public class PlayerInfo
     {
-        public float score;
+        public string score;
         public int level;
         public string playerName;
-
     }
 
     [System.Serializable]
@@ -26,7 +25,7 @@ public class SaveLoad : MonoBehaviour
         public List<PlayerInfo> playerInfoList = new List<PlayerInfo>();
     }
 
-    public void Save(float score, int level, string playerName)
+    public void Save(string score, int level, string playerName)
     {
 
         SaveData data = new SaveData();
